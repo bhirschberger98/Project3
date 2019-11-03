@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Project3</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="create_account">Create Account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="dob">Date of Birth</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="account_created">Account Created</string>
+    <string name="name_short">Name Must be at least 3 character</string>
+    <string name="name_long">Name Must less then 30 character</string>
+    <string name="invalid_date">Invalid Date</string>
+    <string name="password_match">Passwords Must Match</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="rules">There Will be 5 questions, both multiple choice and multiple answer. Good Luck!</string>
+    <string name="play_again">Play Again</string>
+    <string name="log_out">Log out</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_title">Confirm</string>
+    <string name="confirm_msg">Are you sure?</string>
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="next">Next</string>
+    <string name="logo">logo</string>
+    <string name="parent_student">I am a...</string>
+    <string name="parent">Parent</string>
+    <string name="student">Student</string>
+</resources>

@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 public class UserDatabaseHandler extends SQLiteOpenHelper {
 
@@ -37,6 +39,7 @@ public class UserDatabaseHandler extends SQLiteOpenHelper {
                 COLUMN_DOB + " TEXT, " +
                 COLUMN_IS_PARENT + " INTEGER " + ");";
         db.execSQL(query);
+        Instant.now().truncatedTo(ChronoUnit.MONTHS);
     }
 
     @Override

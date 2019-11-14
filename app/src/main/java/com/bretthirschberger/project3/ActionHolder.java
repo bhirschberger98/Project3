@@ -6,12 +6,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
 /**
@@ -23,19 +23,16 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class ActionHolder extends Fragment implements View.OnDragListener {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private ImageView mHolder1;
-    private ImageView mHolder2;
-    private ImageView mHolder3;
-    private ImageView mHolder4;
+    private ImageView mHolders[];
+//    private ImageView mHolder2;
+//    private ImageView mHolder3;
+//    private ImageView mHolder4;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Direction[] mDirections;
 
     private ActionHolderListener mListener;
 
@@ -65,46 +62,132 @@ public class ActionHolder extends Fragment implements View.OnDragListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View.OnDragListener onDragListener=(v, event) -> {
-            int dragEvent = event.getAction();
-            ImageView target = (ImageView)v;
-
-            final ImageView view = (ImageView) event.getLocalState();
-            switch (dragEvent) {
-                case DragEvent.ACTION_DRAG_ENTERED:
-//                    Toast.makeText(, "Entered", +Toast.LENGTH_SHORT).show();
-//                    v.setBackgroundResource(R.drawable.ic_launcher_background);
-//                    v.setBackground(view.getBackground());
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-//                    v.setBackgroundResource(R.drawable.common_google_signin_btn_icon_disabled);
-
-                    break;
-                case DragEvent.ACTION_DROP:
-//                    Toast.makeText(v.getApplicationContext(), "Dropped", Toast.LENGTH_SHORT).show();
-                    target.setImageDrawable(view.getDrawable());
-                    break;
-            }
-            return true;
-        };
+        mDirections = new Direction[]{Direction.NONE, Direction.NONE, Direction.NONE, Direction.NONE};
+        mHolders = new ImageView[4];
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_action_holder, container, false);
-        mHolder1=v.findViewById(R.id.holder1);
-        mHolder2=v.findViewById(R.id.holder2);
-        mHolder3=v.findViewById(R.id.holder3);
-        mHolder4=v.findViewById(R.id.holder4);
-        mHolder1.setOnDragListener(onDragListener);
-        mHolder2.setOnDragListener(onDragListener);
-        mHolder3.setOnDragListener(onDragListener);
-        mHolder4.setOnDragListener(onDragListener);
+        mHolders[0] = v.findViewById(R.id.holder1);
+        mHolders[1] = v.findViewById(R.id.holder2);
+        mHolders[2] = v.findViewById(R.id.holder3);
+        mHolders[3] = v.findViewById(R.id.holder4);
+        mHolders[0].setOnDragListener((dragged, event) -> {
+            int dragEvent = event.getAction();
+            ImageView target = (ImageView) dragged;
+            final ImageView view = (ImageView) event.getLocalState();
+            if (dragEvent == DragEvent.ACTION_DROP) {
+                target.setImageDrawable(view.getDrawable());
+                Log.i("ID",dragged.getId()+"");
+                Log.i("ID img",view.getId()+"");
+                Log.i("ID UP",R.id.up+"");
+                switch (view.getId()) {
+                    case R.id.up:
+                        mDirections[0] = Direction.UP;
+                        break;
+                    case R.id.down:
+                        mDirections[0] = Direction.DOWN;
+                        break;
+                    case R.id.left:
+                        mDirections[0] = Direction.LEFT;
+                        break;
+                    case R.id.right:
+                        mDirections[0] = Direction.RIGHT;
+                        break;
+                    default:
+                        mDirections[0] = Direction.NONE;
+                        break;
+                }
+            }
+            return true;
+        });
+        mHolders[1].setOnDragListener((dragged, event) -> {
+            int dragEvent = event.getAction();
+            ImageView target = (ImageView) dragged;
+
+            final ImageView view = (ImageView) event.getLocalState();
+            if (dragEvent == DragEvent.ACTION_DROP) {
+                target.setImageDrawable(view.getDrawable());
+                switch (view.getId()) {
+                    case R.id.up:
+                        mDirections[1] = Direction.UP;
+                        break;
+                    case R.id.down:
+                        mDirections[1] = Direction.DOWN;
+                        break;
+                    case R.id.left:
+                        mDirections[1] = Direction.LEFT;
+                        break;
+                    case R.id.right:
+                        mDirections[1] = Direction.RIGHT;
+                        break;
+                    default:
+                        mDirections[1] = Direction.NONE;
+                        break;
+                }
+            }
+            return true;
+        });
+        mHolders[2].setOnDragListener((dragged, event) -> {
+            int dragEvent = event.getAction();
+            ImageView target = (ImageView) dragged;
+
+            final ImageView view = (ImageView) event.getLocalState();
+            if (dragEvent == DragEvent.ACTION_DROP) {
+                target.setImageDrawable(view.getDrawable());
+                switch (view.getId()) {
+                    case R.id.up:
+                        mDirections[2] = Direction.UP;
+                        break;
+                    case R.id.down:
+                        mDirections[2] = Direction.DOWN;
+                        break;
+                    case R.id.left:
+                        mDirections[2] = Direction.LEFT;
+                        break;
+                    case R.id.right:
+                        mDirections[2] = Direction.RIGHT;
+                        break;
+                    default:
+                        mDirections[2] = Direction.NONE;
+                        break;
+                }
+            }
+            return true;
+        });
+        mHolders[3].setOnDragListener((dragged, event) -> {
+            int dragEvent = event.getAction();
+            ImageView target = (ImageView) dragged;
+
+            final ImageView view = (ImageView) event.getLocalState();
+            if (dragEvent == DragEvent.ACTION_DROP) {
+                target.setImageDrawable(view.getDrawable());
+                switch (view.getId()) {
+                    case R.id.up:
+                        mDirections[3] = Direction.UP;
+                        break;
+                    case R.id.down:
+                        mDirections[3] = Direction.DOWN;
+                        break;
+                    case R.id.left:
+                        mDirections[3] = Direction.LEFT;
+                        break;
+                    case R.id.right:
+                        mDirections[3] = Direction.RIGHT;
+                        break;
+                    default:
+                        mDirections[1] = Direction.NONE;
+                        break;
+                }
+            }
+            return true;
+        });
         return v;
     }
 
@@ -131,6 +214,9 @@ public class ActionHolder extends Fragment implements View.OnDragListener {
     }
 
 
+    public Direction[] getDirections() {
+        return mDirections;
+    }
 
     /**
      * This interface must be implemented by activities that contain this

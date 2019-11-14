@@ -15,25 +15,25 @@
             android:id="@+id/holder1"
             android:layout_width="50dp"
             android:layout_height="48dp"
-            android:src="@drawable/common_google_signin_btn_icon_disabled" />
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
         <ImageView
             android:id="@+id/holder2"
             android:layout_width="50dp"
             android:layout_height="48dp"
-            android:src="@drawable/common_google_signin_btn_icon_disabled" />
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
         <ImageView
             android:id="@+id/holder3"
             android:layout_width="50dp"
             android:layout_height="48dp"
-            android:src="@drawable/common_google_signin_btn_icon_disabled" />
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
         <ImageView
             android:id="@+id/holder4"
             android:layout_width="50dp"
             android:layout_height="48dp"
-            android:src="@drawable/common_google_signin_btn_icon_disabled" />
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
     </LinearLayout>
 

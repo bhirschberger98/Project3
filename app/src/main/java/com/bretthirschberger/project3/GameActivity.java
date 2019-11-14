@@ -2,42 +2,67 @@ package com.bretthirschberger.project3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ClipData;
+import android.animation.ObjectAnimator;
+import android.graphics.Matrix;
+import android.graphics.Path;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.DragEvent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
-public class GameActivity extends AppCompatActivity implements ActionHolder.ActionHolderListener {
+public class GameActivity extends AppCompatActivity
+        implements ActionHolder.ActionHolderListener, DirectionFragment.DirectionFragmentListener {
 
-    private ImageView mImageView;
-    private ImageView mImageView2;
+    private ActionHolder mActionHolder;
+    private ImageView mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        mImageView = findViewById(R.id.imageView);
-        mImageView2 = findViewById(R.id.imageView2);
-        mImageView.setOnLongClickListener(v -> {
-            ClipData data = ClipData.newPlainText("", "");
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
-            v.startDragAndDrop(data, shadowBuilder, v, 0);
-            return true;
-        });
-        mImageView2.setOnLongClickListener(v -> {
-            ClipData data = ClipData.newPlainText("", "");
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
-            v.startDragAndDrop(data, shadowBuilder, v, 0);
-            return true;
-        });
+        mActionHolder = (ActionHolder) getSupportFragmentManager().findFragmentById(R.id.holder_fragment);
+        mPlayer = findViewById(R.id.player);
+
+    }
+
+
+    public void startMove(View view) {
+        int delay=0;
+        for (Direction direction : mActionHolder.getDirections()) {
+            ObjectAnimator animation;
+            switch (direction) {
+                case UP:
+                    animation = ObjectAnimator.ofFloat(mPlayer, "translationY", -200f * (delay + 1));
+                    break;
+                case DOWN:
+                    animation = ObjectAnimator.ofFloat(mPlayer, "translationY", 200f * (delay + 1));
+                    break;
+                case LEFT:
+                    animation = ObjectAnimator.ofFloat(mPlayer, "translationX", -400f * (delay + 1));
+                    break;
+                case RIGHT:
+                    animation = ObjectAnimator.ofFloat(mPlayer, "translationX", 400f * (delay + 1));
+                    break;
+                default:
+                    animation = null;
+                    break;
+            }
+            if (animation != null){
+                animation.setDuration(2000);
+                animation.setStartDelay(2000 * delay);
+                animation.start();
+                delay++;
+            }
+            Log.i("Direction", direction.toString());
+        }
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+
 }

@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final static String USERNAME_KEY="username";
 
     private EditText mEmailField;
     private EditText mPasswordField;
@@ -31,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view) {
         User user = mHandler.getUser(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        if (true) {
-//            Log.i("user", user.toString());
-            startActivity(new Intent(getApplicationContext(), GameActivity.class));
+        if (user!=null) {
+            Log.i("user", user.toString());
+            startActivity(new Intent(getApplicationContext(), GameListActivity.class).putExtra(USERNAME_KEY,user.getName()));
         } else {
             Toast.makeText(getApplicationContext(), "User not found", Toast.LENGTH_SHORT).show();
         }

@@ -38,5 +38,11 @@
             android:layout_height="wrap_content"
             android:paddingVertical="8dip"
             app:srcCompat="@drawable/right_arrow" />
+
+        <ImageView
+            android:id="@+id/blank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/common_google_signin_btn_icon_dark_normal_background" />
     </LinearLayout>
 </FrameLayout>

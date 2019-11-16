@@ -72,7 +72,6 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
 
-
         mFirstNameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -163,7 +162,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        mUserTypeSelect.setOnCheckedChangeListener((group,checkedId) -> checkValidEntry());
+        mUserTypeSelect.setOnCheckedChangeListener((group, checkedId) -> checkValidEntry());
     }
 
     @Override
@@ -219,8 +218,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 !mPasswordField.getText().toString().equals("") &&
                 mPasswordField.getText().toString().equals(mConfirmPasswordField.getText().toString()) &&
                 isValidDate() &&
-                isValidEmail()&&
-                !(mUserTypeSelect.getCheckedRadioButtonId()==-1)) {
+                isValidEmail() &&
+                !(mUserTypeSelect.getCheckedRadioButtonId() == -1)) {
             mRegisterButton.setEnabled(true);
         } else {
             mRegisterButton.setEnabled(false);
@@ -229,7 +228,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @SuppressLint("SimpleDateFormat")
     public boolean isValidDate() {
-
         try {
             new SimpleDateFormat("MM/dd/yyyy").parse(mDOBField.getText().toString().trim());
             return true;
@@ -277,19 +275,19 @@ public class RegistrationActivity extends AppCompatActivity {
         String name = mFirstNameField.getText().toString().trim() + " " + mLastNameField.getText().toString().trim();
         String dob = mDOBField.getText().toString().trim();
         String password = mPasswordField.getText().toString();
-        boolean isParent=true;
+        boolean isParent = true;
 
-        switch (mUserTypeSelect.getCheckedRadioButtonId()){
+        switch (mUserTypeSelect.getCheckedRadioButtonId()) {
             case R.id.parent_option:
-                isParent=true;
+                isParent = true;
                 break;
             case R.id.student_option:
-                isParent=false;
+                isParent = false;
                 break;
         }
 
-        UserDatabaseHandler handler = new UserDatabaseHandler(this,null);
-        handler.addUser(new User(email,name,password,dob,isParent));
+        UserDatabaseHandler handler = new UserDatabaseHandler(this, null);
+        handler.addUser(new User(email, name, password, dob, isParent));
 
         Toast.makeText(getApplicationContext(), getString(R.string.account_created), Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));

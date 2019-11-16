@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,8 @@ public class DirectionFragment extends Fragment {
     private ImageView mDown;
     private ImageView mLeft;
     private ImageView mRight;
-    private Direction[] mDirections;
+    private ImageView mEmpty;
+
 
     private DirectionFragmentListener mListener;
 
@@ -86,10 +86,12 @@ public class DirectionFragment extends Fragment {
         mDown = v.findViewById(R.id.down);
         mLeft = v.findViewById(R.id.left);
         mRight = v.findViewById(R.id.right);
+        mEmpty = v.findViewById(R.id.blank);
         mUp.setOnLongClickListener(onClickListener);
         mDown.setOnLongClickListener(onClickListener);
         mLeft.setOnLongClickListener(onClickListener);
         mRight.setOnLongClickListener(onClickListener);
+        mEmpty.setOnLongClickListener(onClickListener);
         return v;
     }
 
@@ -108,9 +110,6 @@ public class DirectionFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-    public Direction[] getDirections() {
-        return mDirections;
     }
     /**
      * This interface must be implemented by activities that contain this
